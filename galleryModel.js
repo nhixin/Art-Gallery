@@ -7,7 +7,7 @@ const gallerySchema = mongoose.Schema({
     Artist: String,         // Artist's name
     Year: String,           // Published year of the artwork
     Category: String,       // Category it's in
-    Medium: String,         // Artwork's medium/material
+    Medium: String,         // Artwork's medium
     Description: String,    // Decription of the artwork
     Poster: {
         data: Buffer,       // Save image in binary form
