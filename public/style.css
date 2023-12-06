@@ -1,0 +1,49 @@
+body {
+    font-family: American Typewriter, serif;
+    background-color: rgb(195, 230, 245);
+    line-height: 1.75; 
+    color: rgb(52, 51, 51);
+}
+
+p {
+    font-size: large;
+}
+
+a {
+    font-size: large;
+    color: rgb(47, 79, 90);
+}
+
+h1 {
+    position: relative;
+    left: 1%;
+    color: rgb(149, 61, 91);
+    font-size: 50px;
+    width: 62%;
+    line-height: 140%;
+}
+
+h2 {
+    position: relative;
+    left: 1%;
+    color: rgb(79, 97, 66);
+    font-size: x-large;
+}
+
+#hpImage {
+    position: relative;
+    top: -40%;
+    left: 65%;
+    width: 30%; 
+    height: auto;
+    border: 8px solid rgb(120,134,107);
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px 1px rgba(138, 136, 136, 0.794);
+}
+
+#left {
+    position: relative;
+    left: 3%;
+    width:  58%; 
+    line-height: 300%;
+}
