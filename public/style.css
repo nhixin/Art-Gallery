@@ -19,7 +19,7 @@ h1 {
     left: 1%;
     color: rgb(149, 61, 91);
     font-size: 50px;
-    width: 62%;
+    width: 60%; 
     line-height: 140%;
 }
 
@@ -28,12 +28,14 @@ h2 {
     left: 1%;
     color: rgb(79, 97, 66);
     font-size: x-large;
+    width:  60%; 
 }
 
 #hpImage {
-    position: relative;
-    top: -40%;
-    left: 65%;
+    position: fixed;
+    top: 22%;
+    float: right;
+    right: 2%;
     width: 30%; 
     height: auto;
     border: 8px solid rgb(120,134,107);
@@ -41,9 +43,14 @@ h2 {
     box-shadow: 0px 0px 10px 1px rgba(138, 136, 136, 0.794);
 }
 
+#artIllustration {
+    position: relative;
+    width:  80%; 
+}
+
 #left {
     position: relative;
-    left: 3%;
-    width:  58%; 
+    left: 5%;
+    width:  55%; 
     line-height: 300%;
 }

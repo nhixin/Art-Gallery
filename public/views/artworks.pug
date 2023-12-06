@@ -11,4 +11,7 @@ html
         h2 Click on any links below to view different artworks at our gallery!
 
         div#left
-            p Hi, this is for testing!!!!
+            ol
+                each artwork in pugData
+                    li
+                        a(href=`/artworks/${artwork["_id"]}`) #{artwork["Title"]}

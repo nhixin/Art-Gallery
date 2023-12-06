@@ -1,0 +1,24 @@
+html
+    head
+        a(href="/") Go back to the home page
+        | #{" "} |
+        a(href="/artworks") View list of all artworks
+        br
+
+        title Individual Artwork
+        h1 Information about the artwork: #{pugData.Title} 
+        link(rel="stylesheet", href="/style.css")
+
+    body
+        h2 General information about the artwork: 
+        div#left
+            p <strong>Artist of #{pugData["Title"]}</strong>: #{pugData.Artist}
+            p <strong>Published year</strong>: #{pugData.Year}
+            p <strong>Artwork's category</strong>: #{pugData.Category}
+            p <strong>Medium of the artwork</strong>: #{pugData.Medium}
+            p <strong>Description</strong>: #{pugData.Description}
+            p <strong>Illustration</strong>:
+                br
+                img(id="artIllustration" src=`${pugData.Poster}`, alt=`${pugData["Title"]}`)
+
+

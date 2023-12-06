@@ -13,10 +13,11 @@ galleryArtworks = JSON.parse(fs.readFileSync("database/gallery.json"));
 //-------------------------------------------------------------------------------------------------------
 // Require monggoose in the program
 const mongoose = require('mongoose');
-const Gallery = require('./galleryModel');
+const Gallery = require('./galleryModel'); 
 
 // Mongoose deployment's connection string
-const connectionStr = "mongodb://127.0.0.1:27017/gallery";
+//const connectionStr = "mongodb://127.0.0.1:27017/gallery";
+const connectionStr = "mongodb://134.117.128.120/gallery";
 
 // Create an array of data to insert the database
 let dataToInsert = [];
@@ -42,7 +43,8 @@ async function run() {
                 Category: artwork["Category"],          // Category it's in
                 Medium: artwork["Medium"],              // Artwork's medium
                 Description: artwork["Description"],    // Decription of the artwork
-                Poster: artwork["Poster"]               // Save image in binary form
+                Poster: artwork["Poster"]                  // Save artwork in binary form
+
             }
 
             // Add the new data to the dataToInsert array for many insertions

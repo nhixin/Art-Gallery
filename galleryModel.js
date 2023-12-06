@@ -9,10 +9,7 @@ const gallerySchema = mongoose.Schema({
     Category: String,       // Category it's in
     Medium: String,         // Artwork's medium
     Description: String,    // Decription of the artwork
-    Poster: {
-        data: Buffer,       // Save image in binary form
-        contentType: String  
-    }
+    Poster: String          // Save artwork in binary form
 });
 
 // Create a model based on the gallerySchema

@@ -21,16 +21,15 @@ app.set('view engine', 'pug');
 
 
 //==============================================================================
-// Require mongoose and gallery model
+// Require mongoose
 const mongoose = require('mongoose');
-const Gallery = require('./galleryModel');
 
 // Require session and MongoDBStore 
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session); 
 
 // Mongoose deployment's connection string
-const connectionStr = "mongodb://127.0.0.1:27017/gallery";
+const connectionStr = "mongodb://134.117.128.120/gallery";
 // Connect to the database
 mongoose.connect(connectionStr); 
 
