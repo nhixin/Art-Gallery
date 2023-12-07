@@ -1,0 +1,21 @@
+html
+    head
+        a(href="/") Go back to the home page
+        | #{" "} |
+        a(href="/users/artists") See list of artists
+        | #{" "} | 
+        a(href="/artworks") View list of all artworks
+        br
+
+        title 
+        h1 Information about the artist: #{name} 
+        link(rel="stylesheet", href="/style.css")
+
+    body
+        h2 All of #{name}'s artworks in XNN Art Gallery: 
+        div#left
+            - let num = 1
+            each artwork in pugData
+                p 
+                    | <strong>Artwork ##{num++}</strong>: #{" "}
+                    a(href=`/artworks/${artwork["_id"]}`) #{artwork.Title}

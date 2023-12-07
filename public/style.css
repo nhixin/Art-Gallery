@@ -32,12 +32,11 @@ h2 {
 }
 
 #hpImage {
-    position: fixed;
-    top: 22%;
+    position: absolute;
+    top: 0;
     float: right;
     right: 2%;
-    width: 30%; 
-    height: auto;
+    width: 70%; 
     border: 8px solid rgb(120,134,107);
     border-radius: 8px;
     box-shadow: 0px 0px 10px 1px rgba(138, 136, 136, 0.794);
@@ -45,12 +44,20 @@ h2 {
 
 #artIllustration {
     position: relative;
-    width:  80%; 
+    width:  100%;
 }
 
 #left {
     position: relative;
     left: 5%;
     width:  55%; 
+    line-height: 300%;
+}
+
+#right {
+    position: relative;
+    top: -46%;
+    float: right;
+    width:  45%; 
     line-height: 300%;
 }

@@ -1,8 +1,8 @@
 html
     head
         a(href="/") Go back to the home page
-        | #{" "} |
-        a(href="/users/artists") See list of artists
+        | #{" "} | 
+        a(href="/artworks") View list of all artworks
         br
 
         title Gallery of Artworks
@@ -10,10 +10,10 @@ html
         link(rel="stylesheet", href="/style.css")
 
     body
-        h2 Click on any links below to view different artworks at our gallery!
+        h2 Click on any links below to view the artworks of different artists!
 
         div#left
             ol
-                each artwork in pugData
+                each artist in pugData 
                     li
-                        a(href=`/artworks/${artwork["_id"]}`) #{artwork["Title"]}
+                        a(href=`/users/artists/${artist}`) #{artist}

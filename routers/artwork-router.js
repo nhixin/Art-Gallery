@@ -16,12 +16,12 @@ router.get("/:artworkID", sendArtwork);  // Get the list of individual artwork
 
 
 //==================================================================================
-// ALL FUNCTIONs FOR patron-router.js
+// ALL FUNCTIONs FOR artwork-router.js
 
 // Load all of the artworks to the webpage 
 async function loadArtworks(req, res, next) {
     try {
-        // Get the collections of supply 
+        // Get the collections of artwork 
         const allArtworks = await Gallery.find({});
 
         // Respond with html page (or json data) if user request text/html (or application/json)

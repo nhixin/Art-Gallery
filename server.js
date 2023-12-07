@@ -36,8 +36,8 @@ mongoose.connect(connectionStr);
 // Add routers 
 let artworkRouter = require("./routers/artwork-router");
 app.use("/artworks", artworkRouter);
-// let artistRouter = require("./routers/artist-router");
-// app.use("/artists", artistRouter);
+let userRouter = require("./routers/user-router");
+app.use("/users", userRouter);
 // let reviewRouter = require("./routers/review-router");
 // app.use("/reviews", reviewRouter);
 
