@@ -1,23 +1,20 @@
 html
     head
         title Login page - XNN Art Gallery
-        h1 XNN ART GALLERY 
         link(rel="stylesheet", href="/style.css")
         script(src="/js/register.js")
 
     body
-        h2 User registration to access information from XNN Art Gallery
         div#middle
-            label(for="fullName") <strong>Full Name</strong>: #{" "}
-            input(type="text" id="fullName" name="fullName")
-            br
-            label(for="email") <strong>Email</strong>: #{" "}
-            input(type="email" id="email" name="email")
-            br
-            label(for="password") <strong>Password</strong>: #{" "}
-            input(type="password" id="password" name="password")
-            br
-            label(for="passwordConfirm") <strong>Confirm Password</strong>: #{" "}
-            input(type="password" id="passwordConfirm" name="passwordConfirm")
-            br
-            input(type="submit" id="submit" value="Register")
+            h1(style="left:20%; top:auto; text-align:center;") XNN ART GALLERY 
+            h2(style="left:20%; top:-5%; text-align:center;") User registration to access information from XNN Art Gallery
+            div#registrationForm
+                label(for="fullName") <strong>Full Name</strong>: #{" "}
+                input(type="text" id="fullName" name="fullName")
+                br
+                label(for="password") <strong>Password</strong>: #{" "}
+                input(type="password" id="password" name="password")
+                br
+                button(type="button" id= "loginButton" onclick="login()") Log in
+                | #{" "}
+                button(type="button" id= "signUpButton" onclick="register()") Register new account

@@ -12,6 +12,7 @@ router.use(express.json());
 
 // Different routes 
 router.get("/", loginPage)   // User login 
+router.post("/", signUp)     // New user signup 
 router.get("/artists", getGivenArists);  // Get the list of given artists
 router.get("/artists/:artistName", getEachArtist);      // Get individual artist 
 
@@ -28,6 +29,17 @@ async function loginPage(req, res, next) {
         res.status(500).send(err.message);  
     }
 }
+
+// Get data from new user signing up --> create new session ID
+async function signUp() {
+    try {
+
+    } catch (err) {
+        // Send an error
+        res.status(500).send(err.message); 
+    }
+}
+
 
 // Function to get all artist
 async function getGivenArists(req, res, next) {

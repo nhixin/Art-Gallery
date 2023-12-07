@@ -9,9 +9,6 @@ const path = require('path');
 // Parse incoming requests with JSON 
 app.use(express.json());
 
-// Set static folder 
-app.use(express.static(path.join(__dirname, 'public')));
-
 // Set static folder for image
 app.use('/images', express.static('images'));
 
@@ -41,7 +38,7 @@ const store = new MongoDBStore({
 
 // Use express-session
 app.use(session({
-	secret: 'some secret key here', resave: true, saveUninitialized: true,
+	secret: 'thisismyartGalleryProj', resave: true, saveUninitialized: true,
 	store: store
 }));
 
@@ -57,6 +54,9 @@ let userRouter = require("./routers/user-router");
 app.use("/users", userRouter);
 // let reviewRouter = require("./routers/review-router");
 // app.use("/reviews", reviewRouter);
+
+// Set static folder 
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Get homepage
 app.get("/", async function(req, res) {
