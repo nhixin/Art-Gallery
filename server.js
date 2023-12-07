@@ -33,6 +33,23 @@ const connectionStr = "mongodb://134.117.128.120/gallery";
 // Connect to the database
 mongoose.connect(connectionStr); 
 
+// Create new MongoDBStore
+const store = new MongoDBStore({
+	uri: 'mongodb://127.0.0.1:27017/store',
+	collection: 'sessiondata' 
+});
+
+// Use express-session
+app.use(session({
+	secret: 'some secret key here', resave: true, saveUninitialized: true,
+	store: store
+}));
+
+// Log the express-session into the console 
+app.use(function (req, res, next) { 
+	console.log(req.session); next();
+});
+
 // Add routers 
 let artworkRouter = require("./routers/artwork-router");
 app.use("/artworks", artworkRouter);

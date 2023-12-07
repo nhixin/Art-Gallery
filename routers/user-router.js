@@ -19,8 +19,14 @@ router.get("/artists/:artistName", getEachArtist);      // Get individual artist
 //==================================================================================
 // ALL FUNCTIONs FOR artwork-router.js
 
-async function loginPage(req, res, next) {
-
+// Create a login page --> when the user is successfully logged in, redirect to the user's patron/artist page
+async function loginPage(req, res, next) { 
+    try {
+        res.status(200).render("login");
+    } catch (err) {
+        // Send an error
+        res.status(500).send(err.message);  
+    }
 }
 
 // Function to get all artist
