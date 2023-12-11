@@ -76,9 +76,9 @@ h2 {
 
 #registrationForm {
     position: relative;
-    left: 34%;
-    width:  30%;
-    top: 1vh;
+    margin-left: 30.5vw;
+    width: 35vw;
+    margin-top: 5vh;
     height: auto;
     font-size: large;
     text-align: center;

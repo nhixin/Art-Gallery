@@ -98,7 +98,7 @@ async function authentication(req, res, next) {
 async function moveWindow(req, res, next) {
     try {
         // Get the username of the account
-        const getUsername = req.body.userName;
+        const getUsername = req.params.userName;
 
         // Render the user account page
         res.status(200).render("userAccount.pug", {pugData: getUsername});
