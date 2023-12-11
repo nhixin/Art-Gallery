@@ -28,7 +28,7 @@ function register() {
                alert(data.UserName + " is a unique username. A new account is created successfully!"); 
 
                // Redirect to the user account
-
+               window.location.href = `/users/account/${data.UserName}`;
             }         
          }
       }
@@ -69,11 +69,11 @@ function login() {
             }
 
             // Alert the user if there is an account with correct username and password --> move to the user account
-            if (data.success) {
-               alert(data.success);
+            if (data.UserName) {
+               alert(`The account ${data.UserName} exists. Proceed to the user account...`);
 
                // Redirect to the user account
-
+               window.location.href = `/users/account/${data.UserName}`;
             }
          }
       }

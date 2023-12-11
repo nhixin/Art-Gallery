@@ -1,16 +1,18 @@
 html
     head
         title XNN Art Gallery
-        h1 Welcome to XNN Art Gallery's Home page
+        div#main-heading
+            h1 Welcome to XNN Art Gallery's Home page
         link(rel="stylesheet", href="/style.css")
 
     body
-        h2 Click on these links below to explore XNN Art Gallery!
+        div#sub-heading
+            h2 Click on these links below to explore XNN Art Gallery!
+        div#left-right-grid
+            div#left
+                a(href="/artworks") Go to the art gallery to view all of the artworks
+                br
+                a(href="/users/artists") View the list of artists in this gallery
 
-        div#left
-            a(href="/artworks") Go to the art gallery to view all of the artworks
-            br
-            a(href="/users/artists") View the list of artists in this gallery
-
-        div#right
-            img(id="hpImage" src="images/IMG_7207.JPG", alt="home_page_image")
+            div#right
+                img(id="hp-image" src="images/IMG_7207.JPG", alt="home_page_image")

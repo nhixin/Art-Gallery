@@ -1,12 +1,11 @@
 html
     head
-        a(href="/") Go to the home page 
-        | #{" "} |
-        br
-
         title Welcome to your account 
-        h1 Hello ! 
+        h1 Hello #{pugData}!
         link(rel="stylesheet", href="/style.css")
 
     body
-        
+        h2 Use the links below to explore your user account or to access the home page of XNN Art Gallery
+
+        div#left
+            a(href="/") Go to the home page 

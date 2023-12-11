@@ -8,19 +8,23 @@ html
         br
 
         title #{pugData.Title}
-        h1 You are at the page of the artwork: #{pugData.Title} 
+        div#main-heading
+            h1 You are at the page of the artwork: #{pugData.Title} 
         link(rel="stylesheet", href="/style.css")
 
     body
-        h2 General information about this artwork: 
-        div#left
-            p <strong>Artist of #{pugData["Title"]}</strong>: #{pugData.Artist}
-            p <strong>Published year</strong>: #{pugData.Year}
-            p <strong>Artwork's category</strong>: #{pugData.Category}
-            p <strong>Medium of the artwork</strong>: #{pugData.Medium}
-            p <strong>Description</strong>: #{pugData.Description}
-            p <strong>Illustration</strong>:
-                br
-                img(id="artIllustration" src=`${pugData.Poster}`, alt=`${pugData["Title"]}`)
+        div#sub-heading
+            h2 General information about this artwork: 
+        div#left-right-grid
+            div#left
+                p <strong>Artist of #{pugData["Title"]}</strong>: #{pugData.Artist}
+                p <strong>Published year</strong>: #{pugData.Year}
+                p <strong>Artwork's category</strong>: #{pugData.Category}
+                p <strong>Medium of the artwork</strong>: #{pugData.Medium}
+                p <strong>Description</strong>: #{pugData.Description}
+                p <strong>Illustration</strong>:
+                    br
+                    img(id="artIllustration" src=`${pugData.Poster}`, alt=`${pugData["Title"]}`)
 
 
+ 

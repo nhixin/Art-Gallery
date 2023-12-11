@@ -12,9 +12,10 @@ let router = express.Router();
 router.use(express.json());
 
 // Different routes 
-router.get("/", loginPage)   // New user login 
-router.post("/", signUp)     // New user signup 
-router.put("/", authentication);   // Check for authentication 
+router.get("/", loginPage);    // User login 
+router.post("/", signUp);      // New user signup 
+router.put("/", authentication);    // Check for authentication 
+router.get("/account/:userName", moveWindow);
 router.get("/artists", getGivenArists);  // Get the list of given artists
 router.get("/artists/:artistName", getEachArtist);      // Get individual artist 
 
@@ -32,7 +33,7 @@ async function loginPage(req, res, next) {
     }
 } 
 
-// Get data from new user signing up --> create new session ID
+// Get data when the new user sign up --> create new session ID
 async function signUp(req, res, next) {
     try {
         // Create new user 
@@ -82,7 +83,7 @@ async function authentication(req, res, next) {
         // Send successful message to the client side if user is found 
         if (userfound) {
             // Send the user data to client side 
-            res.status(200).json({success: `The account ${UserName} exists. Proceed to the user account...`});
+            res.status(200).send({UserName});
         } else { // Send the message for username that is not existed or password that does not match with existing data
             res.status(200).json({errMessage: "The username does not exist or the password is invalid!"});
         }
@@ -92,6 +93,20 @@ async function authentication(req, res, next) {
     }
     
 }
+
+// When the registration is valid, or the authentication for login is correct => switch to the user account 
+async function moveWindow(req, res, next) {
+    try {
+        // Get the username of the account
+        const getUsername = req.body.userName;
+
+        // Render the user account page
+        res.status(200).render("userAccount.pug", {pugData: getUsername});
+    } catch (err) {
+        // Send an error 
+        res.status(500).send(err.message); 
+    }
+} 
 
 // Function to get all artist
 async function getGivenArists(req, res, next) {

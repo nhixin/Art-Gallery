@@ -6,14 +6,16 @@ html
         br
 
         title Gallery of Artworks
-        h1 Welcome to the gallery of different artworks at XNN Art Gallery
+        div#main-heading
+            h1 Artworks categorized by their author/artist  
         link(rel="stylesheet", href="/style.css")
 
     body
-        h2 Click on any links below to view the artworks of different artists!
-
-        div#left
-            ol
-                each artist in pugData 
-                    li
-                        a(href=`/users/artists/${artist}`) #{artist}
+        div#sub-heading
+            h2 Click on any links below to view the artworks of different artists!
+        div#left-right-grid
+            div#left
+                ol
+                    each artist in pugData 
+                        li
+                            a(href=`/users/artists/${artist}`) #{artist}
