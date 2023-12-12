@@ -101,12 +101,16 @@ async function switchWindow(req, res, next) {
         // Get the username of the account
         const getUsername = req.params.userName;
 
-        // Update the currentUser field to true to indicate that this specific account is in used
-        const checkData = await UsersModel.findOneAndUpdate(
-            {UserName: getUsername},
-            {CurrentUser: true},
+        // Update the CurrentUser in the database to true to indicate that this specific account is in used
+        await UsersModel.findOneAndUpdate({UserName: getUsername}, {$set: {CurrentUser: true}},
             {new: true} // Returns the updated document
         );
+
+        // Also update the CurrentUser in req.session 
+        const userToUpdate = req.session.users.find(user => user.UserName === getUsername);
+        if (userToUpdate) {
+            userToUpdate.CurrentUser = true;
+        }
 
         // Render the user account page
         res.status(200).render("userAccount.pug", {pugData: getUsername});
@@ -119,7 +123,7 @@ async function switchWindow(req, res, next) {
 // Function to let the user to log out of the account
 async function logOutFunc(req, res, next) {
     // Find the user with the CurrentUser's status as true 
-    const findUser = await UsersModel.findOne({ CurrentUser: true });
+    const findUser = await UsersModel.findOne({CurrentUser: true});
 
     // If there is a user with CurrentUser's status as true
     if (findUser) {
@@ -141,7 +145,7 @@ async function getGivenArists(req, res, next) {
         res.status(200).render("artists", {pugData: allArtists});
     } catch (err) {
         // Send an error
-        res.status(500).send(err.message);  
+        res.status(500).send(err.message);
     }
 }
 
