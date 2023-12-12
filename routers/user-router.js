@@ -12,10 +12,11 @@ let router = express.Router();
 router.use(express.json());
 
 // Different routes 
-router.get("/", loginPage);    // User login 
-router.post("/", signUp);      // New user signup 
-router.put("/", authentication);    // Check for authentication 
-router.get("/account/:userName", moveWindow);
+router.get("/", loginPage);    // User login
+router.post("/", signUp);   // New user signup 
+router.put("/", logIn);    // When the user wants to log in 
+router.get("/account/:userName", switchWindow);   // Switch window to the user account 
+router.get("/logout", logOutFunc);  // Allow user to log out of the account and change the CurrentUser status
 router.get("/artists", getGivenArists);  // Get the list of given artists
 router.get("/artists/:artistName", getEachArtist);      // Get individual artist 
 
@@ -39,7 +40,8 @@ async function signUp(req, res, next) {
         // Create new user 
         let newUser = new UsersModel({
             UserName: req.body.uName, 
-            Password: req.body.pass
+            Password: req.body.pass,
+            CurrentUser: false
         });
         
         // Save the user into the "users" collection
@@ -70,8 +72,8 @@ async function signUp(req, res, next) {
     }
 }
 
-// Function to check for user's authentication when logging in 
-async function authentication(req, res, next) {
+// Function to let the user logging in  
+async function logIn(req, res, next) {
     try {
         // Get the username and password from the client side 
         const UserName = req.body.uName;
@@ -91,14 +93,20 @@ async function authentication(req, res, next) {
         // Send an error
         res.status(500).send(err.message); 
     }
-    
 }
 
 // When the registration is valid, or the authentication for login is correct => switch to the user account 
-async function moveWindow(req, res, next) {
+async function switchWindow(req, res, next) {
     try {
         // Get the username of the account
         const getUsername = req.params.userName;
+
+        // Update the currentUser field to true to indicate that this specific account is in used
+        const checkData = await UsersModel.findOneAndUpdate(
+            {UserName: getUsername},
+            {CurrentUser: true},
+            {new: true} // Returns the updated document
+        );
 
         // Render the user account page
         res.status(200).render("userAccount.pug", {pugData: getUsername});
@@ -107,6 +115,21 @@ async function moveWindow(req, res, next) {
         res.status(500).send(err.message); 
     }
 } 
+
+// Function to let the user to log out of the account
+async function logOutFunc(req, res, next) {
+    // Find the user with the CurrentUser's status as true 
+    const findUser = await UsersModel.findOne({ CurrentUser: true });
+
+    // If there is a user with CurrentUser's status as true
+    if (findUser) {
+        findUser.CurrentUser = false;
+        alert(`Logging out of ${findUser.UserName} account...`);
+        res.status(200).redirect("/users");
+    } else { // If no user has current status as true 
+        res.status(200).send("Cannot do this action because you are not logged in yet.");
+    }
+}
 
 // Function to get all artist
 async function getGivenArists(req, res, next) {
