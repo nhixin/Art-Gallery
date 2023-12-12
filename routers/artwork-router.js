@@ -11,12 +11,20 @@ let router = express.Router();
 router.use(express.json());
 
 // Different routes 
-router.get("/", loadArtworks);          // Get the list of artworks
-router.get("/:artworkID", sendArtwork);  // Get the list of individual artwork
+router.get("/", auth, loadArtworks);          // Get the list of artworks
+router.get("/:artworkID", auth, sendArtwork);  // Get the list of individual artwork
 
 
 //==================================================================================
 // ALL FUNCTIONs FOR artwork-router.js
+
+// authorization function
+function auth(req, res, next) {
+    if (!req.session.idLoggedIn) {
+        res.status(200).send("You are unauthorized!");
+    }
+    next();
+}
 
 // Load all of the artworks to the webpage 
 async function loadArtworks(req, res, next) {

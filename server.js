@@ -58,8 +58,16 @@ app.use("/users", userRouter);
 // Set static folder 
 app.use(express.static(path.join(__dirname, 'public')));
 
+// authorization function
+function auth(req, res, next) {
+    if (!req.session.idLoggedIn) {
+        res.status(200).send("You are unauthorized!");
+    }
+    next();
+}
+
 // Get homepage
-app.get("/", async function(req, res) {
+app.get("/", auth, async function(req, res) {
     try {
         res.status(200).render("index");
     } catch (err) {
