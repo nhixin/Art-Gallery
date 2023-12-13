@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 
 // Create schema for the database
 const reviewsSchema = mongoose.Schema({
+    ArtworkName: String,
     WriterName: String,
     Review: String
 });

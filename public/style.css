@@ -105,7 +105,7 @@ h2 {
     color: rgb(52, 51, 51);
 }
 
-#loginButton, #signUpButton, #reviewButton {
+#loginButton, #signUpButton, #reviewButton, #findButton, #likeButton, #unlikeButton, #followButton, #unfollowButton{
     position:  relative;
     font-size: 16px;
     top: 10px;
@@ -118,7 +118,7 @@ h2 {
     margin-top: 10px;
 }
 
-#loginButton:hover, #signUpButton:hover, #reviewButton:hover {
+#loginButton:hover, #signUpButton:hover, #reviewButton:hover, #findButton:hover, #likeButton:hover, #unlikeButton:hover, #followButton:hover, #unfollowButton:hover {
     font-family: American Typewriter, serif;
     border: 5px solid rgb(183, 160, 168);
     background-color: rgb(255, 227, 237);

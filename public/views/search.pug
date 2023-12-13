@@ -1,0 +1,37 @@
+html
+    head
+        a(href="/") Go back to the home page
+        | #{" "} | 
+        a(href="/artworks") View list of all artworks
+        | #{" "} |
+        a(href="/users/artists") See list of artists
+        br
+
+        title Artwork Searching  
+        div#main-heading
+            h1 Enter information to search for specific artworks: 
+        link(rel="stylesheet", href="/style.css")
+
+    body
+        div#left-right-grid
+            div#left
+                label(for="findTitle") Enter the title of the artwork:  
+                input(type="textbox" id="findTitle")
+                br
+                label(for="findArtist") Enter the artist:  
+                input(type="textbox" id="findArtist") 
+                br
+                label(for="findCtg") Enter the category:  
+                input(type="textbox" id="findCtg")
+                br
+                label(for="findYear") Enter the year published:  
+                input(ype="textbox" id="findYear") 
+                br
+                label(for="findMedium") Enter the medium:  
+                input(type="textbox" id="findMedium")                
+                br
+
+                button(type="button" id= "findButton" onclick="findArt()") Add this item
+                br
+        
+        

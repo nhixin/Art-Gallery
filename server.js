@@ -47,13 +47,16 @@ app.use(function (req, res, next) {
 	console.log(req.session); next();
 });
 
+// Require users module
+const UsersModel = require("./usersModel.js");
+
 // Add routers 
 let artworkRouter = require("./routers/artwork-router");
 app.use("/artworks", artworkRouter);
 let userRouter = require("./routers/user-router");
 app.use("/users", userRouter);
-// let reviewRouter = require("./routers/review-router");
-// app.use("/reviews", reviewRouter);
+let searchRouter = require("./routers/search-router");
+app.use("/search", searchRouter);
 
 // Set static folder 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -69,7 +72,8 @@ function auth(req, res, next) {
 // Get homepage
 app.get("/", auth, async function(req, res) {
     try {
-        res.status(200).render("index");
+        const currentUser = await UsersModel.findById(req.session.idLoggedIn);
+        res.status(200).render("index", {currentUser});
     } catch (err) {
         res.status(500).send(err.message);
         return;

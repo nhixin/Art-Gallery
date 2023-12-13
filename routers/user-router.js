@@ -16,7 +16,7 @@ router.get("/", loginPage); // User login
 router.post("/", signUp); // New user signup 
 router.put("/", logIn); // When the user wants to log in 
 router.get("/account/:userName", switchWindow); // Switch window to the user account 
-router.get("/logout", logOutFunc); // Allow user to log out of the account and change the CurrentUser status
+router.get("/account", auth, logOutFunc); // Allow user to log out of the account and change the CurrentUser status
 router.get("/artists", auth, getGivenArists); // Get the list of given artists
 router.get("/artists/:artistName", auth, getEachArtist); // Get individual artist 
 
@@ -121,28 +121,26 @@ async function switchWindow(req, res, next) {
         }
 
         // Add req.session.idLoggedIn to keep track with users who have logged in to their account
-        req.session.idLoggedIn = userToUpdate._id;
+        if (!req.session.idLoggedIn || req.session.idLoggedIn == null) {
+            req.session.idLoggedIn = userToUpdate._id;
+        }
 
         // Render the user account page
         res.status(200).render("userAccount.pug", {pugData: getUsername});
     } catch (err) {
         // Send an error 
-        res.status(500).send(err.message); 
+        res.status(500).send(err.message);
     }
 } 
 
 // Function to let the user to log out of the account
 async function logOutFunc(req, res, next) {
     // Find the user with the CurrentUser's status as true 
-    const findUser = await UsersModel.findOne({CurrentUser: true});
-
-    // Find the user in req.session
-    const userInSession = req.session.users.find(user => user.UserName === req.params.userName);
+    const findUser = await UsersModel.findById(req.session.idLoggedIn);
 
     // If there is a user with CurrentUser's status as true
     if (findUser) {
         findUser.CurrentUser = false;
-        userInSession.CurrentUser = false;
         req.session.idLoggedIn = null;
         console.log(`Logging out of ${findUser.UserName} account...`);
         res.status(200).redirect("/users");
@@ -177,7 +175,7 @@ async function getEachArtist(req, res, next) {
         // Send the data to pug
         res.status(200).render("artist.pug", {pugData: artWorks, name: aName});
     } catch (err) {
-        // Send an error
+        // Send an error 
         res.status(500).send(err.message);  
     }
 }

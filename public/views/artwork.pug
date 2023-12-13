@@ -5,16 +5,23 @@ html
         a(href="/artworks") View list of all artworks
         | #{" "} |
         a(href="/users/artists") See list of artists
+        | #{" "} | 
+        a(href="/search") Search for artworks 
         br
 
         title #{pugData.Title}
         div#main-heading
             h1 You are at the page of the artwork: #{pugData.Title} 
         link(rel="stylesheet", href="/style.css")
+        script(src="/js/writeReview.js")
 
     body
         div#sub-heading
             h2 General information about this artwork: 
+        div(id="like-unlike-button" style="padding-left: 2vw;")
+            button(type="button" class = "btn" id= "likeButton" onclick="toggleLikeUnlike()") Like
+            | #{" "}
+            button(type="button" class = "btn" id= "unlikeButton" onclick="toggleLikeUnlike()") Unlike                
         div#left-right-grid
             div#left
                 p <strong>Artist of #{pugData["Title"]}</strong>: #{pugData.Artist}
@@ -25,13 +32,16 @@ html
                 p <strong>Illustration</strong>:
                     br
                     img(id="artIllustration" src=`${pugData.Poster}`, alt=`${pugData["Title"]}`)
+                br
+                p(style="color: rgb(149, 61, 91);") <strong>Here is the list of all reviews for #{pugData["Title"]}</strong>:
+                div#reviews 
+
             div#right
-                div#like-button
                 div#review-form
-                    label(for="nameInput" style="width:80%;") <strong>Please enter your name</strong>: #{" "}
+                    label(for="nameInput") <strong>Please enter your name</strong>: #{" "}
                     input(type="text" id="nameInput" name="nameInput" style="width:80%; text-align:center;")
                     br
-                    label(for="reviewInput" style="width:80%;") <strong>Leave a review</strong>: #{" "}
+                    label(for="reviewInput") <strong>Leave a review</strong>: #{" "}
                     textarea(rows="4" style="width:80%;" id="reviewInput")
                     br
-                    button(type="button" id= "reviewButton" onclick="sendReview()") Submit review
+                    button(type="button" onclick=`sendReview('${pugData._id}')` id= "reviewButton") Submit review

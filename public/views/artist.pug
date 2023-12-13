@@ -5,16 +5,23 @@ html
         a(href="/users/artists") See list of artists
         | #{" "} | 
         a(href="/artworks") View list of all artworks
+        | #{" "} | 
+        a(href="/search") Search for artworks 
         br
 
         title #{name}
         div#main-heading
             h1 Information about the artist: #{name} 
         link(rel="stylesheet", href="/style.css")
+        script(src="/js/artistButton.js")
 
     body
         div#sub-heading
             h2 All of #{name}'s artworks in XNN Art Gallery: 
+        div(id="follow-unfollow-button" style="padding-left: 2vw;")
+            button(type="button-user" class = "follow-btn" id= "followButton" onclick="toggleFollowUnfollow()") Follow
+            | #{" "}
+            button(type="button-user" class = "unfollow-btn" id= "unfollowButton" onclick="toggleFollowUnfollow()") Unfollow
         div#left-right-grid
             div#left
                 - let num = 1

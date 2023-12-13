@@ -4,10 +4,13 @@ html
         div#main-heading 
             h1 Hello #{pugData}! Here is your account information:
         link(rel="stylesheet", href="/style.css")
+        script(src="/js/userPage.js")
 
-    body
+    body 
         div#sub-heading
             h2 Use the links below to explore your user account or to access the home page of XNN Art Gallery
         div#left-right-grid
             div#left
                 a(href="/") Go to the home page 
+                br
+                a(href="/users/account") Click this link to log out
