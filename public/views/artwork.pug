@@ -25,3 +25,13 @@ html
                 p <strong>Illustration</strong>:
                     br
                     img(id="artIllustration" src=`${pugData.Poster}`, alt=`${pugData["Title"]}`)
+            div#right
+                div#like-button
+                div#review-form
+                    label(for="nameInput" style="width:80%;") <strong>Please enter your name</strong>: #{" "}
+                    input(type="text" id="nameInput" name="nameInput" style="width:80%; text-align:center;")
+                    br
+                    label(for="reviewInput" style="width:80%;") <strong>Leave a review</strong>: #{" "}
+                    textarea(rows="4" style="width:80%;" id="reviewInput")
+                    br
+                    button(type="button" id= "reviewButton" onclick="sendReview()") Submit review

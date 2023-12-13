@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require("mongoose");
 const ObjectId = require('mongoose').Types.ObjectId
 const Gallery = require('../galleryModel');
+const ReviewsModel = require('../reviewsModel');
 
 //Create the router 
 let router = express.Router();
@@ -11,8 +12,10 @@ let router = express.Router();
 router.use(express.json());
 
 // Different routes 
-router.get("/", auth, loadArtworks);          // Get the list of artworks
-router.get("/:artworkID", auth, sendArtwork);  // Get the list of individual artwork
+router.get("/", auth, loadArtworks); // Get the list of artworks
+router.get("/:artworkID", auth, sendArtwork); // Get the list of individual artwork
+//router.get("/:artworkID/reviews", auth, reviewPage); // Create a page containning all of the reviews
+router.post("/:artworkID/reviews", auth, writeReview); // Allow user to write review for the artwork
 
 
 //==================================================================================
@@ -64,6 +67,41 @@ async function sendArtwork(req, res, next) {
                 res.status(200).json({"Individual Artwork": foundArtwork});
             }
         }); 
+    } catch (err) {
+        res.status(500).send(err.message);  // Send an error
+    }
+}
+
+/* // Create a page for all reviews of an artwork
+async function reviewPage(req, res, next) {
+    try {
+        // Send the information about the artwork 
+        res.status(200).render("reviews", {pugData: foundArtwork});
+    } catch (err) {
+        res.status(500).send(err.message);  // Send an error
+    }
+} */    
+
+// Create a function for user to write review about the artwork
+async function writeReview(req, res, next) {
+    try {
+        // Find the artwork based on its ID
+        const foundArtwork = await Gallery.find({_id: req.params.artworkID});
+
+        // Create new review 
+        let uReview = new UsersModel({
+            WriterName: req.body.inputName, 
+            Review: req.body.userReview,
+        });
+
+        // Add req.session.reviews if there is none
+        if (!req.session.reviews) {
+            req.session.reviews = [];
+        }
+        req.session.reviews.push(uReview);
+
+        // Render the page with reviews content 
+        res.status(200).render("reviews", {pugData: foundArtwork, newReview: newUser});
     } catch (err) {
         res.status(500).send(err.message);  // Send an error
     }

@@ -12,13 +12,13 @@ let router = express.Router();
 router.use(express.json());
 
 // Different routes 
-router.get("/", loginPage);    // User login
-router.post("/", signUp);   // New user signup 
-router.put("/", logIn);    // When the user wants to log in 
-router.get("/account/:userName", switchWindow);   // Switch window to the user account 
-router.get("/logout", logOutFunc);  // Allow user to log out of the account and change the CurrentUser status
-router.get("/artists", auth, getGivenArists);  // Get the list of given artists
-router.get("/artists/:artistName", auth, getEachArtist);      // Get individual artist 
+router.get("/", loginPage); // User login
+router.post("/", signUp); // New user signup 
+router.put("/", logIn); // When the user wants to log in 
+router.get("/account/:userName", switchWindow); // Switch window to the user account 
+router.get("/logout", logOutFunc); // Allow user to log out of the account and change the CurrentUser status
+router.get("/artists", auth, getGivenArists); // Get the list of given artists
+router.get("/artists/:artistName", auth, getEachArtist); // Get individual artist 
 
 
 //==================================================================================
@@ -137,14 +137,14 @@ async function logOutFunc(req, res, next) {
     const findUser = await UsersModel.findOne({CurrentUser: true});
 
     // Find the user in req.session
-    const userInSession = req.session.users.find(user => user.UserName === getUsername);
+    const userInSession = req.session.users.find(user => user.UserName === req.params.userName);
 
     // If there is a user with CurrentUser's status as true
     if (findUser) {
         findUser.CurrentUser = false;
         userInSession.CurrentUser = false;
         req.session.idLoggedIn = null;
-        alert(`Logging out of ${findUser.UserName} account...`);
+        console.log(`Logging out of ${findUser.UserName} account...`);
         res.status(200).redirect("/users");
     } else { // If the user do not have current status as true 
         res.status(200).send("Cannot do this action because you are not logged in yet.");

@@ -8,7 +8,7 @@ const userSchema = mongoose.Schema({
     CurrentUser: Boolean    // Check if the account is currently in use
 });
 
-// Create a model based on the gallerySchema
+// Create a model based on the userSchema 
 const userModel = mongoose.model("users", userSchema);
 
 // Export the model 
